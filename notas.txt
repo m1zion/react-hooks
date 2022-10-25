@@ -1,0 +1,59 @@
+/******************************************************************************************/
+CLASE 7 useReducer para agregar elementos a favoritos
+1. agrega el useReducer
+2. crea un estado inicial: la lista de favoritos vacia
+3. crea el reducer, es una funcion que usa switch identificar el metodo a usar
+	  recive state y action:
+		state: el estado actual.
+		action: objeto con el metodo que quieres ejecutar junto con el contenido.
+		action.type: el metodo a ejecutar.
+		action.payload: el contenido nuevo que quieres manejar.
+		Ej: ADD_TO_FAVORITE toma el estado actual y le agrega el contenido de payload
+4. crea el use reducer:
+		favorite: es el nombre el valor de lectura.
+		dispatch: el nombre de la funcion para llamar a los metodos.
+		useReducer toma dos datos, el primero es el reducer, contenedor del switch de metodos
+		el segundo parametro es el estado inicial, que por lo regular es vacio
+5. Metodo que llama al dispatch / la funcion para acceder a un metodo del reducer
+		contiene el type que es el nombre del metodo
+		y el payload que es el contenido que se manejara al correr el metodo
+		el contenido del payload en este caso se obtiene del tag que lo llamo con el onclick
+6. Onclick que manda a llamar al dispatch
+		es un onclick que al ejecutarse manda la data del caracter
+		en la funcion esta info sera mandada al reducer y de ahi al state final en favorite
+7. map al contenido de favorite, listado del contenido de este array, 
+		si no hay pues no se ve nada
+/******************************************************************************************/
+CLASE 9 useMemo memoizacion para busqueda de personajes
+1. Agregar useMemo
+2. Agregar una constate de useState que se encargara de la busqueda
+    const [search,setSearch] = useState('');
+3. Agregar la funcion que manejara la busqueda y traera el resultado del input
+    const handleSearch = (event) =>{
+        setSearch(event.target.value)
+    }
+4. Agregar el input de html
+      <div className='Search'>
+        <input type= "text" value= {search} onChange={handleSearch}/>
+      </div>
+5. Agregar la constante para filtrar
+    const filteredUsers = characters.filter((user)=>{
+        return user.name.toLowerCase().includes(search.toLowerCase)
+    })
+6. Lo reemplazamos en el mapeado de datos
+    {characters.map(character => (      ----> filteredUsers
+
+7. Aplicamos useMemo el cual ira guarddando el el hook el resultado para optimizar el codigo
+  const filteredUsers =  useMemo(() =>
+    characters.filter((user)=>{
+      return user.name.toLowerCase().includes(search.toLowerCase())
+   }),
+   [characters,search]
+  )
+/******************************************************************************************/
+Clase 10 useRef: manejo profesional de inputs y formularios
+1. Importar useRef
+2. Agregar la constante y asignarsela al elemento html
+        const searchInput = useRef(null);
+        <input type= "text" value= {search} ref={searchInput} onChange={handleSearch}/>
+        /******Ahora el valor estara en useRef dentro de current.value******/
