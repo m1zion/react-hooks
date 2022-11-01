@@ -1,4 +1,43 @@
 /******************************************************************************************/
+Clase 3 useState
+1. Importar el useState
+2. Pasamos un valor y una funcion modificadora
+  const [darkMode, setDarkMode] = useState(false);
+  const handleClick = () => {
+    setDarkMode(!darkMode);
+  }
+3. Agregamos la funcion en un elemento
+        <button type="button" onClick={() => setDarkMode
+        (!darkMode)}>{darkMode ? 'Dark Mode 2' : 'Light Mode 2'}</button>
+
+/******************************************************************************************/
+Clase 3 useEffect
+1. Importar useEffect
+2. Crear la constante
+    const [characters, setCharacters] = useState([]);
+3. Creamos la funcion useEffect
+    useEffect(() => {
+      fetch('https://rickandmortyapi.com/api/character/')
+        .then(response => response.json())
+        .then(data => setCharacters(data.results));
+    }, []);
+
+4. Mapeamos la variable
+    <div className="Characters">
+      {characters.map(character => (
+        <h2>{character.name}</h2>
+      ))}
+    </div>
+/******************************************************************************************/
+CLASE 5 useContext: la fusión de React Hooks y React Context
+1. Crear el archivo context/ThemeContext.json
+2. En header importamos el contexto y el useContext y encapsulamos el codigo
+      <ThemeContext.Provider value ="cyan">
+3. En index.js creamos la variable de color
+  const color = useContext(ThemeContext);
+4. Asignamos el tema a nuestro elemento de html
+
+/******************************************************************************************/
 CLASE 7 useReducer para agregar elementos a favoritos
 1. agrega el useReducer
 2. crea un estado inicial: la lista de favoritos vacia
